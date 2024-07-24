@@ -14,7 +14,7 @@ class MyApp:
         self.documents = []
         self.embeddings = None
         self.index = None
-        self.load_pdf("THEDIA1.pdf")
+        self.load_pdf("Punjabi Diet Expert-pdf.pdf")
         self.build_vector_db()
 
     def load_pdf(self, file_path: str) -> None:
@@ -91,16 +91,15 @@ with demo:
     chatbot = gr.ChatInterface(
         respond,
         examples=[
-            ["I feel overwhelmed with work."],
-            ["Can you guide me through a quick meditation?"],
-            ["How do I stop worrying about things I can't control?"],
-            ["What are some DBT skills for managing anxiety?"],
-            ["Can you explain mindfulness in DBT?"],
-            ["I am interested in DBT excercises"],
-            ["I feel restless. Please help me."],
-            ["I have destructive thoughts coming to my mind repetatively."]
+            ["What is the purpose of Eating Well with Canada's Food Guide?"],
+            ["Why are foods categorized into food groups?"],
+            ["What are the recommended daily servings for vegetables and fruits? Provide examples of serving sizes."],
+            ["How many servings of grain products are recommended daily for men and women, and what constitutes one serving?"],
+            ["How many servings of milk and alternatives are recommended daily, and what are examples of one serving from this group?"],
+            ["How many servings of meat and alternatives are recommended daily for men and women, and what are examples of one serving from this group?"],
+            ["How much unsaturated fat per day is recommended for consumption, and what are examples of sources?"]
         ],
-        title='Dialectical Behaviour Therapy Assistant👩‍⚕️🧘‍♀️'
+        title='Diet Expert Assistant'
     )
 
 if __name__ == "__main__":
