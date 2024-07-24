@@ -1,42 +1,83 @@
-# Customized-LLM-APP
+# Diet Expert Assistant: RAG-Enhanced Nutritional Guidance
 
-Building a Retrieval-Augmented Generation (RAG) bot can significantly enhance the capabilities of a language model by incorporating external knowledge to generate more accurate and contextually relevant responses. This guide will walk you through creating a simple RAG bot using Gradio and the Hugging Face APIs.
+## Introduction
 
-But how does RAG enhance LLM’s performance?
+This project presents a Retrieval-Augmented Generation (RAG) chatbot specializing in nutritional advice. Leveraging a comprehensive PDF guide from Dietitian Services at HealthLinkBC, this AI-powered assistant provides accurate, context-aware responses to dietary inquiries.
 
-RAG improves the performance of language models by augmenting them with external documents. This method retrieves relevant documents based on the user query and combines them with the original prompt before passing them to the language model for response generation. This approach ensures that the language model can access up-to-date and domain-specific information without the need for extensive retraining.
+## Core Technology
 
+The Diet Expert Assistant utilizes cutting-edge natural language processing techniques:
 
+1. **Large Language Model (LLM)**: HuggingFaceH4/zephyr-7b-beta
+2. **Embedding Model**: all-MiniLM-L6-v2 sentence transformer
+3. **Vector Database**: FAISS for efficient similarity search
+4. **User Interface**: Gradio for an intuitive chat experience
 
-A common scenario of RAG helping LLM (Source)
+## RAG Implementation
 
-The basic steps in RAG can be simplified as follows:
+Our RAG system enhances the LLM's capabilities by incorporating domain-specific knowledge:
 
-Input: The question to which the LLM system responds is referred to as the input. If no RAG is used, the LLM is directly used to respond to the question.
+1. **Document Processing**: The HealthLinkBC PDF is parsed and segmented.
+2. **Indexing**: Text segments are converted into vector embeddings and indexed.
+3. **Retrieval**: User queries trigger a semantic search in the indexed documents.
+4. **Augmented Generation**: Retrieved context is combined with the user query for informed LLM responses.
 
-Indexing: If RAG is used, then a series of related documents are indexed by chunking them first, generating embeddings of the chunks, and indexing them into a vector store. At inference, the query is also embedded in a similar way.
+## Key Features
 
+- Real-time nutritional guidance based on HealthLinkBC recommendations
+- Dynamic response generation considering both user input and relevant guide sections
+- Customizable chat parameters (max tokens, temperature, top-p) for tailored interactions
+- Efficient information retrieval from a pre-processed nutritional knowledge base
 
-Basic retrieval steps in RAG. (Source)
+## Setup and Usage
 
-Retrieval: The relevant documents are obtained by comparing the query against the indexed vectors, also denoted as “Relevant Documents”.
+1. Clone the repository
+2. Install dependencies: `pip install -r requirements.txt`
+3. Ensure the HealthLinkBC PDF is in the project directory as "Punjabi Diet Expert-pdf.pdf"
+4. Launch the application: `python app.py`
+5. Interact with the chatbot through your web browser
 
-Generation: The relevant documents are combined with the original prompt as additional context. The combined text and prompt are then passed to the model for response generation which is then prepared as the final output of the system to the user.
+## Example Queries
 
-In the example provided, using the model directly fails to respond to the question due to a lack of knowledge of current events. On the other hand, when using RAG, the system can pull the relevant information needed for the model to answer the question appropriately. (Source)
+The Diet Expert Assistant can address various nutrition-related questions, such as:
 
-Now Let’s Build a Chatbot using RAG:
+- Daily serving recommendations for different food groups
+- Portion size guidelines
+- Balanced meal planning tips
+- Nutritional content of common foods
 
-I have used Zephyr LLM model and all-MiniLM-L6-v2 sentence transformer model. This sentence-transformers model maps sentences & paragraphs to a 384 dimensional dense vector space and can be used for tasks like clustering or semantic search.
+## Technical Details
 
-The all-* models were trained on all available training data (more than 1 billion training pairs) and are designed as general purpose models. The all-mpnet-base-v2 model provides the best quality, while all-MiniLM-L6-v2 is 5 times faster and still offers good quality. Toggle All models to see all evaluated original models.
+- **PDF Processing**: PyMuPDF (fitz) for text extraction
+- **Embedding Generation**: SentenceTransformer for creating document and query vectors
+- **Vector Similarity Search**: FAISS for rapid retrieval of relevant content
+- **Response Generation**: Zephyr-7b-beta model for natural language generation
 
-We need the following ingredients:
+## Limitations and Ethical Considerations
 
-1. A PDF as your knowledgebase
+- The assistant's knowledge is limited to the content of the HealthLinkBC guide
+- It should not be considered a substitute for professional medical or nutritional advice
+- Users should be aware of potential biases in AI-generated content
 
-2. A requirements.txt file
+## Future Enhancements
 
-3. An app.py file
+- Incorporation of multiple authoritative nutritional sources
+- Implementation of multi-modal interactions (e.g., image recognition for food items)
+- Regular updates to the knowledge base for the most current dietary guidelines
 
-4. An account on Hugging Face (See this blog to learn about building a LLM chatbot in Hugging Face)
+## Contribution Guidelines
+
+We welcome contributions to improve the Diet Expert Assistant. Please refer to our contribution guidelines for more information on submitting pull requests, reporting issues, or suggesting enhancements.
+
+## Acknowledgments
+
+- Dietitian Services at HealthLinkBC for the comprehensive nutritional guide
+- The open-source community for the tools and libraries used in this project
+
+## Contact
+
+For inquiries or feedback, please contact ha4369939@alphacollege.me.
+
+---
+
+Disclaimer: This Diet Expert Assistant is designed for informational purposes only. Always consult with qualified healthcare professionals for personalized nutritional advice.
